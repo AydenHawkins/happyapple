@@ -1,5 +1,6 @@
 <?php
 // Author: Ayden Hawkins
+session_start();
 $page = 'home';
 ?>
 <!DOCTYPE html>
@@ -22,7 +23,7 @@ $page = 'home';
             <p>Explore our seasonal collections and subscribe for offers and tips about self-care.</p>
         </section>
 
-        <section class="container" style="margin-top:1.5rem">
+        <section class="container">
             <div class="card">
                 <h3>Featured</h3>
                 <p>New: Autumn Orchard Collection — warm, cozy, and apple-scented.</p>
