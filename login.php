@@ -7,7 +7,7 @@ $errors = [];
 $values = ['email' => ''];
 $pw = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['submit']) && $_POST['submit'] === 'Login') {
     $values['email'] = trim($_POST['email'] ?? '');
     $pw = trim($_POST['password'] ?? '');
 
@@ -36,9 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
-                    $success = true;
-                    $values['email'] = '';
-                    $pw = '';
+                    header('Location: index.php');
+                    exit;
                 }
             }
         } catch (Exception $e) {
@@ -64,12 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section class="main-section card">
             <h2>Login</h2>
 
-            <?php if (!empty($success)) { ?>
-                <div class="card">
-                    <p>Login successful.</p>
-                </div>
-            <?php } ?>
-
             <form id="loginForm" action="login.php" method="post" novalidate>
                 <p>
                     <?php if (!empty($errors) && in_array('Email is required.', $errors)) { ?>
@@ -94,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </p>
 
                 <p>
-                    <button type="submit">Login</button>
+                    <button type="submit" name="submit" value="Login">Login</button>
                 </p>
             </form>
         </section>

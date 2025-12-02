@@ -9,7 +9,7 @@ $values = ['username' => '', 'fullname' => '', 'email' => '', 'newsletter' => fa
 $pw = '';
 $confirm = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['submit']) && $_POST['submit'] === 'Register') {
 
     $values['username'] = trim($_POST['username'] ?? '');
     $values['fullname'] = trim($_POST['fullname'] ?? '');
@@ -62,10 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':newsletter' => $values['newsletter'] ? 1 : 0,
                 ]);
 
-                $success = true;
-                $values = ['username' => '', 'fullname' => '', 'email' => '', 'newsletter' => false];
-                $pw = '';
-                $confirm = '';
+                header('Location: login.php');
+                exit;
             }
         } catch (PDOException $e) {
             die('Database connection failed: ' . $e->getMessage());
@@ -89,12 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="container">
         <section class="main-section card">
             <h2>Create an account</h2>
-
-            <?php if (!empty($success)) { ?>
-                <div class="card">
-                    <p>Registration successful.</p>
-                </div>
-            <?php } ?>
 
             <form id="registerForm" action="register.php" method="post" novalidate>
                 <p>
@@ -150,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </p>
 
                 <p>
-                    <button type="submit">Register</button>
+                    <button type="submit" name="submit" value="Register">Register</button>
                 </p>
             </form>
         </section>
