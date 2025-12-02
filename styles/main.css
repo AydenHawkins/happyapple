@@ -500,6 +500,138 @@ small.help {
     background: #6ba85f;
 }
 
+/* Product Detail Page */
+.back-link {
+    display: inline-block;
+    color: var(--accent);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.product-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.product-detail-image {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.product-detail-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.product-detail-info {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.product-detail-info h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    color: #222;
+}
+
+.detail-scent {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #444;
+    margin: 0 0 0.5rem 0;
+}
+
+.detail-category {
+    font-size: 1rem;
+    color: var(--muted);
+    margin: 0 0 1rem 0;
+}
+
+.detail-price {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 1rem 0 2rem 0;
+}
+
+.product-description {
+    margin: 2rem 0;
+    padding-top: 2rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.product-description h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+}
+
+.product-description p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.detail-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+.quantity-controls-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.qty-display-detail {
+    font-weight: 600;
+    font-size: 1.5rem;
+    min-width: 40px;
+    text-align: center;
+}
+
+.in-cart-message {
+    text-align: center;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0;
+}
+
+.error-message {
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.error-message h2 {
+    margin-top: 0;
+}
+
+.error-message p {
+    margin: 1rem 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .cart-item {
@@ -523,5 +655,10 @@ small.help {
     .product-grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         gap: 1rem;
+    }
+
+    .product-detail {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 }
