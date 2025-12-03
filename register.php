@@ -37,14 +37,14 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'Register') {
         require_once '../../pdo_connect.php';
 
         try {
-            $stmt = $dbc->prepare('SELECT 1 FROM Users WHERE username = :username LIMIT 1');
+            $stmt = $dbc->prepare('SELECT 1 FROM ha_users WHERE username = :username LIMIT 1');
             $stmt->execute([':username' => $values['username']]);
             if ($stmt->fetchColumn()) {
                 $errors[] = 'Username already exists.';
             }
 
             if ($values['email'] !== '') {
-                $stmt = $dbc->prepare('SELECT 1 FROM Users WHERE email = :email LIMIT 1');
+                $stmt = $dbc->prepare('SELECT 1 FROM ha_users WHERE email = :email LIMIT 1');
                 $stmt->execute([':email' => $values['email']]);
                 if ($stmt->fetchColumn()) {
                     $errors[] = 'Email already in use.';
@@ -53,7 +53,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'Register') {
 
             if (empty($errors)) {
                 $password_hash = password_hash($pw, PASSWORD_DEFAULT);
-                $stmt = $dbc->prepare('INSERT INTO Users (username, fullname, email, password_hash, newsletter) VALUES (:username, :fullname, :email, :password_hash, :newsletter)');
+                $stmt = $dbc->prepare('INSERT INTO ha_users (username, fullname, email, password_hash, newsletter) VALUES (:username, :fullname, :email, :password_hash, :newsletter)');
                 $stmt->execute([
                     ':username' => $values['username'],
                     ':fullname' => $values['fullname'],

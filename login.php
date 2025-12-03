@@ -24,7 +24,7 @@ if (isset($_POST['submit']) && $_POST['submit'] === 'Login') {
     if (empty($errors)) {
         require_once '../../pdo_connect.php';
         try {
-            $stmt = $dbc->prepare('SELECT id, username, fullname, email, password_hash FROM Users WHERE email = :email LIMIT 1');
+            $stmt = $dbc->prepare('SELECT id, username, fullname, email, password_hash FROM ha_users WHERE email = :email LIMIT 1');
             $stmt->execute([':email' => $values['email']]);
             $user = $stmt->fetch();
 

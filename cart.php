@@ -44,14 +44,15 @@ switch ($action) {
                         'image_filename' => $product['image_filename'],
                         'quantity' => $qty
                     );
-                    echo json_encode(['success' => true, 'message' => 'Product added to cart']);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'Product not found']);
                 }
             } catch (PDOException $e) {
-                echo json_encode(['success' => false, 'message' => 'Database error']);
+                // Error handling - could set error message in session
             }
         }
+
+        // Redirect back to referring page or products page
+        $redirect = $_SERVER['HTTP_REFERER'] ?? 'products.php';
+        header("Location: $redirect");
         exit;
         break;
 
@@ -62,14 +63,14 @@ switch ($action) {
         if (isset($_SESSION['cart'][$productId])) {
             if ($qty <= 0) {
                 unset($_SESSION['cart'][$productId]);
-                echo json_encode(['success' => true, 'message' => 'Product removed from cart', 'removed' => true]);
             } else {
                 $_SESSION['cart'][$productId]['quantity'] = $qty;
-                echo json_encode(['success' => true, 'message' => 'Cart updated']);
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Product not in cart']);
         }
+
+        // Redirect back to referring page or products page
+        $redirect = $_SERVER['HTTP_REFERER'] ?? 'products.php';
+        header("Location: $redirect");
         exit;
         break;
 
@@ -96,7 +97,7 @@ switch ($action) {
         if (isset($_SESSION['cart'][$productId])) {
             unset($_SESSION['cart'][$productId]);
         }
-        echo json_encode(['success' => true, 'message' => 'Product removed from cart']);
+        header('Location: cart.php?action=show_cart');
         exit;
         break;
 

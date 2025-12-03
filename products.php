@@ -56,18 +56,27 @@ try {
                         ?>
 
                         <?php if (!$inCart): ?>
-                            <button class="add-to-cart-btn"
-                                    data-product-id="<?php echo $product['product_id']; ?>"
-                                    data-product-name="<?php echo htmlspecialchars($product['product_name']); ?>"
-                                    data-product-scent="<?php echo htmlspecialchars($product['scent']); ?>"
-                                    data-product-price="<?php echo $product['price']; ?>">
-                                Add to Cart
-                            </button>
+                            <form action="cart.php" method="post">
+                                <input type="hidden" name="action" value="add">
+                                <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                <input type="hidden" name="qty" value="1">
+                                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+                            </form>
                         <?php else: ?>
-                            <div class="quantity-controls" data-product-id="<?php echo $product['product_id']; ?>">
-                                <button class="qty-btn qty-decrease">−</button>
+                            <div class="quantity-controls">
+                                <form action="cart.php" method="post" style="display: inline;">
+                                    <input type="hidden" name="action" value="update">
+                                    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                    <input type="hidden" name="qty" value="<?php echo max(0, $quantity - 1); ?>">
+                                    <button type="submit" class="qty-btn">−</button>
+                                </form>
                                 <span class="qty-display"><?php echo $quantity; ?></span>
-                                <button class="qty-btn qty-increase">+</button>
+                                <form action="cart.php" method="post" style="display: inline;">
+                                    <input type="hidden" name="action" value="update">
+                                    <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
+                                    <input type="hidden" name="qty" value="<?php echo $quantity + 1; ?>">
+                                    <button type="submit" class="qty-btn">+</button>
+                                </form>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -77,8 +86,6 @@ try {
     </main>
 
     <?php require('includes/footer.php'); ?>
-
-    <script src="scripts/cart.js"></script>
 </body>
 
 </html>

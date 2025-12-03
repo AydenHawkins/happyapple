@@ -44,13 +44,27 @@
                         </div>
 
                         <div class="cart-item-actions">
-                            <div class="quantity-controls-cart" data-product-id="<?php echo $productId; ?>">
-                                <button class="qty-btn qty-decrease-cart">−</button>
+                            <div class="quantity-controls-cart">
+                                <form action="cart.php" method="post" style="display: inline;">
+                                    <input type="hidden" name="action" value="update">
+                                    <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
+                                    <input type="hidden" name="qty" value="<?php echo max(0, $item['quantity'] - 1); ?>">
+                                    <button type="submit" class="qty-btn">−</button>
+                                </form>
                                 <span class="qty-display-cart"><?php echo $item['quantity']; ?></span>
-                                <button class="qty-btn qty-increase-cart">+</button>
+                                <form action="cart.php" method="post" style="display: inline;">
+                                    <input type="hidden" name="action" value="update">
+                                    <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
+                                    <input type="hidden" name="qty" value="<?php echo $item['quantity'] + 1; ?>">
+                                    <button type="submit" class="qty-btn">+</button>
+                                </form>
                             </div>
                             <p class="item-subtotal">Subtotal: $<?php echo number_format($subtotal, 2); ?></p>
-                            <button class="remove-btn" data-product-id="<?php echo $productId; ?>">Remove</button>
+                            <form action="cart.php" method="post" style="display: inline;">
+                                <input type="hidden" name="action" value="remove">
+                                <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
+                                <button type="submit" class="remove-btn" onclick="return confirm('Remove this item from your cart?');">Remove</button>
+                            </form>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -71,7 +85,9 @@
                 </div>
 
                 <div class="cart-actions">
-                    <button class="btn-primary checkout-btn">Proceed to Checkout</button>
+                    <form action="checkout.php" method="post">
+                        <button type="submit" class="btn-primary checkout-btn">Proceed to Checkout</button>
+                    </form>
                     <a href="cart.php?action=empty_cart" class="btn-secondary" onclick="return confirm('Are you sure you want to empty your cart?');">Empty Cart</a>
                 </div>
             </div>
@@ -79,8 +95,6 @@
     </main>
 
     <?php require('includes/footer.php'); ?>
-
-    <script src="scripts/cart.js"></script>
 </body>
 
 </html>
