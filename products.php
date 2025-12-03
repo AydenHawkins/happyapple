@@ -11,7 +11,7 @@ try {
     require_once '../../pdo_connect.php';
     $sql = 'SELECT * FROM ha_products ORDER BY product_name';
     $stmt = $dbc->query($sql);
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $products = $stmt->fetchAll();
 } catch (PDOException $e) {
     die('Database connection failed: ' . $e->getMessage());
 }

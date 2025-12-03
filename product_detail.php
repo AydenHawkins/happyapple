@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
         require_once '../../pdo_connect.php';
         $stmt = $dbc->prepare('SELECT * FROM ha_products WHERE product_id = :id LIMIT 1');
         $stmt->execute([':id' => $productId]);
-        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+        $product = $stmt->fetch();
 
         if (!$product) {
             $error = 'Product not found.';
