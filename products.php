@@ -8,7 +8,7 @@ if (!isset($_SESSION['cart'])) {
 }
 
 try {
-    require_once 'pdo_connect.php';
+    require_once '../../pdo_connect.php';
     $sql = 'SELECT * FROM ha_products ORDER BY product_name';
     $stmt = $dbc->query($sql);
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);

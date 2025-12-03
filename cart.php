@@ -27,7 +27,7 @@ switch ($action) {
             $_SESSION['cart'][$productId]['quantity'] += $qty;
         } else {
             // New product - get details from database
-            require_once 'pdo_connect.php';
+            require_once '../../pdo_connect.php';
             try {
                 $stmt = $dbc->prepare('SELECT * FROM ha_products WHERE product_id = :id LIMIT 1');
                 $stmt->execute([':id' => $productId]);

@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     $productId = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
     try {
-        require_once 'pdo_connect.php';
+        require_once '../../pdo_connect.php';
         $stmt = $dbc->prepare('SELECT * FROM ha_products WHERE product_id = :id LIMIT 1');
         $stmt->execute([':id' => $productId]);
         $product = $stmt->fetch(PDO::FETCH_ASSOC);
